@@ -32,7 +32,11 @@ const upload = async (req, res) => {
       })
       .on("end", () => {
           rows.forEach(row => insert(row))
-          db.close()
+          db.all("SELECT * FROM csv", function(err, rows) {  
+            rows.forEach(function (row) {  
+                console.log('row: ', row);
+            })  
+          });
           res.status(200).send({
             data: rows
           })
