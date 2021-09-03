@@ -8,5 +8,5 @@ module.exports = {
     Price: "Price",
     ZipCode: "ZipCode",
     CreateDate: "CreateDate",
-    UpdateDate: "UpdateDate",
+    UpdateDate: "UpdateDate"
   };

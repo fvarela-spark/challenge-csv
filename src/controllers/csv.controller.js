@@ -1,17 +1,13 @@
-const db = require('../../config/db.config')
-const insert = require('../../middlewares/db')
+const db = require('../config/db.config')
+const insert = require('../middlewares/db')
 const fs = require("fs");
 const csv = require("fast-csv");
-const CsvParser = require("json2csv").Parser;
-const csv_config = require('../../config/csv.config')
+const csv_config = require('../config/csv.config')
 
 const upload = async (req, res) => {
   try {
-    if (req.file == undefined) {
-      return res.status(400).send("Please upload a CSV file!");
-    }
-
     let rows = [];
+    let providerName = req.body.providerName
     let path = "./src/resources/static/assets/uploads/" + req.file.filename;
 
 
@@ -27,7 +23,9 @@ const upload = async (req, res) => {
             delete row[key]
           }
         }
-        
+
+        row["providerName"] = providerName
+
         rows.push(row);
       })
       .on("end", () => {
